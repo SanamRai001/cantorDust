@@ -1,37 +1,42 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
+
+const services = [
+  {
+    id: 1,
+    slug: "generalConsulting",
+    title: "General Consulting",
+    description:
+      "Analytical solutions and insights for energy, healthcare, manufacturing, and complex operational challenges.",
+  },
+  {
+    id: 2,
+    slug: "physicalAI",
+    title: "Physical AI",
+    description:
+      "Curated datasets for Physical AI. Reliable video and sensor datasets for robotics, embodied AI, and real-world environment training.",
+  },
+];
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  useEffect(()=>{
-    const fetchServices = async () =>{
-      try{
-        const response = await axios.get('http://localhost:5000/api/services');
-        if(response.data.data){
-          setServices(response.data.data);
-        }
-      }
-      catch(err){
-        console.error("Error while fetching services:", err.message);
-      }
-    }
-    fetchServices();
-  },[]);
   return (
-    <>
-      <div className="services">
-        <h1 className="text-4xl text-center">Services</h1>
-        <div className="serviceList">
-            {services.map( items =>(
-              <div key={items._id} className="serviceCard">
-                <h2>{items.title}</h2>
-                <p>{items.description}</p>
-              </div>
-            ))}
-        </div>
+    <main className="services">
+      <div className="section-header">
+        <p className="section-eyebrow">What We Offer</p>
+        <h1 className="section-title">Services</h1>
+        <p>Choose a service area to learn more about how we can help.</p>
       </div>
-    </>
-  )
-}
 
-export default Services
+      <div className="serviceList">
+        {services.map(({ id, slug, title, description, icon }) => (
+          <Link to={`/${slug}`} key={id} className="serviceCard">
+            <h2 className="service-title">{title}</h2>
+            <p className="service-desc">{description}</p>
+            <span className="service-link-cta">Learn more →</span>
+          </Link>
+        ))}
+      </div>
+    </main>
+  );
+};
+
+export default Services;

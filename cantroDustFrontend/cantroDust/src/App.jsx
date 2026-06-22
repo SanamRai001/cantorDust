@@ -6,6 +6,8 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Insights from './pages/Insights';
 import Contact from './pages/Contact';
+import GeneralConsulting from './pages/GeneralConsulting';
+import PhysicalAI from './pages/PhysicalAI';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path='/generalConsulting' element={<GeneralConsulting/> }></Route>
+            <Route path='/physicalAI' element={<PhysicalAI/>}></Route>
           </Routes>
         </main>
         <Footer />

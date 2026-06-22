@@ -1,35 +1,39 @@
-import { useState } from "react"
+import { useState } from "react";
+
+const ContactInfo = ({ icon, label, value }) => (
+  <div className="contact-info-item">
+    <div>
+      <p className="contact-info-label">{label}</p>
+      <p className="contact-info-value">{value}</p>
+    </div>
+  </div>
+);
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = async() =>{
-
-  }
   return (
-    <>
-      <h1 className="text-4xl text-center">Contact Us</h1>
-      <div>
-        <div>
-          <h2>Get in Touch</h2>
-          <p>Location</p>
-          <p>Email</p>
-          <p>Number</p>
-          <p>Social Sites</p>
-        </div>
-        <div>
-          <form action="" onSubmit={()=>handleSubmit()}>
-            <input type="text" placeholder="Your Name" onChange={(e)=>setName(e.target.value)} value={name}/>
-            <input type="email" placeholder="Your Email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
-            <textarea placeholder="Your Message" onChange={(e)=>setMessage(e.target.value)} value={message}></textarea>
-            <input type="submit" value="Send Message" />
-          </form>
+    <section className="contact-page">
+      <div className="section-header">
+        <p className="section-eyebrow">Get In Touch</p>
+        <h1 className="section-title">Contact Us</h1>
+        <p>Have a project in mind? We'd love to hear from you.</p>
+      </div>
+
+      <div className="contact-info-grid">
+        <ContactInfo icon="📍" label="Location" value="Kathmandu, Nepal" />
+        <ContactInfo icon="✉️" label="Email" value="hello@cantordust.ai" />
+        <ContactInfo icon="📞" label="Phone" value="+977 000 000 000" />
+        <ContactInfo icon="🕐" label="Office Hours" value="Mon – Fri, 9am – 6pm NPT" />
+      </div>
+
+      <div className="contact-socials">
+        <p className="contact-info-label">Follow Us</p>
+        <div className="social-links">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">Twitter / X</a>
         </div>
       </div>
-    </>
-  )
-}
+    </section>
+  );
+};
 
-export default Contact
+export default Contact;

@@ -6,7 +6,6 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Insights from './pages/Insights';
 import Contact from './pages/Contact';
-import './App.css'; // Import the CSS
 
 const App = () => {
   return (

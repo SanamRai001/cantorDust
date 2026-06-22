@@ -137,3 +137,38 @@ ul, ol {
   padding: 2rem;
 }
 
+.about{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+.about img{
+  border-radius: 12px;
+  height: 400px;
+  width: 400px;
+}
+.mainTeam{
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  padding: 4rem 4rem;
+}
+.staffMemebers{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.teamCard{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.services{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}

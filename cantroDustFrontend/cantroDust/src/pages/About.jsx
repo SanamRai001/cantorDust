@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import founderImage from "../assets/founder.avif";
 import partnerImage from "../assets/partner.avif";
+import { AnimateIn } from '../components/AnimateIn';
 
 const About = () => {
   const [team, setTeam] = useState([]);
@@ -24,12 +25,12 @@ const About = () => {
   }, []);
 
   return (
-    <>
-      <div className="about">
+    <div className="about">
+      <AnimateIn>
         <div className="mainTeam">
           <img src={founderImage} alt="Image of Founder" />
-          <div className="flex flex-col gap-4">
-            <h1 className="text-4xl">Shreeansh Agrawal - Founder</h1>
+          <div className="about-content">
+            <h1 className="about-heading">Shreeansh Agrawal - Founder</h1>
             <div>
               <p>
                 With over 5 years of experience delivering bespoke AI/ML solutions across sectors, including energy, climate, aviation, healthcare, and telecom, Shreeansh brings deep technical insight combined with strategic vision. Shreeansh graduated summa cum laude from Amherst College with a degree in Mathematics and obtained a dual MBA/MS at MIT Sloan and MIT's School of Engineering. He has previously served as an economic consultant at The Brattle Group, specializing in decarbonization modeling and investment strategy. He also worked to build ML solutions for climate mitigation and churn forecasting at Verizon.
@@ -40,11 +41,13 @@ const About = () => {
             </div>
           </div>
         </div>
+      </AnimateIn>
 
+      <AnimateIn delay={0.1}>
         <div className="mainTeam">
           <img src={partnerImage} alt="Our partner Image" />
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl">Prijesh Sharma - Our Partner</h1>
+          <div className="about-content">
+            <h1 className="about-heading">Prijesh Sharma - Our Partner</h1>
             <div>
               <p>
                 A Data Scientist, AI Engineer, and Software Developer with over three years of experience in building data-driven solutions and intelligent systems. Skilled in machine learning, artificial intelligence, data analytics, and full-stack development. Holds an MSc in Information Technology and Applied Security and a BSc (Hons) in Computing from Islington College under London Metropolitan University.
@@ -55,13 +58,15 @@ const About = () => {
             </div>
           </div>
         </div>
+      </AnimateIn>
 
+      <AnimateIn delay={0.15}>
         <div>
-          <h1 className="text-4xl">Our Team</h1>
+          <h1 className="about-section-title">Our Team</h1>
           <div className="staffMemebers">
-            {
-              team.map(items => (
-                <div key={items._id} className="teamCard">
+            {team.map((items, index) => (
+              <AnimateIn key={items._id} delay={(index % 4) * 0.08}>
+                <div className="teamCard">
                   <Link to={items.portfolioLink}>
                     <img src={items.photoUrl} alt={items.name} />
                   </Link>
@@ -69,12 +74,12 @@ const About = () => {
                   <h3>({items.role})</h3>
                   <p>{items.bio}</p>
                 </div>
-              ))
-            }
+              </AnimateIn>
+            ))}
           </div>
         </div>
-      </div>
-    </>
+      </AnimateIn>
+    </div>
   );
 };
 

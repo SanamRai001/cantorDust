@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AnimateIn } from "../components/AnimateIn";
 
 const services = [
   {
@@ -20,19 +21,23 @@ const services = [
 const Services = () => {
   return (
     <main className="services">
-      <div className="section-header">
-        <p className="section-eyebrow">What We Offer</p>
-        <h1 className="section-title">Services</h1>
-        <p>Choose a service area to learn more about how we can help.</p>
-      </div>
+      <AnimateIn>
+        <div className="section-header">
+          <p className="section-eyebrow">What We Offer</p>
+          <h1 className="section-title">Services</h1>
+          <p>Choose a service area to learn more about how we can help.</p>
+        </div>
+      </AnimateIn>
 
       <div className="serviceList">
-        {services.map(({ id, slug, title, description, icon }) => (
-          <Link to={`/${slug}`} key={id} className="serviceCard">
-            <h2 className="service-title">{title}</h2>
-            <p className="service-desc">{description}</p>
-            <span className="service-link-cta">Learn more →</span>
-          </Link>
+        {services.map(({ id, slug, title, description }, index) => (
+          <AnimateIn key={id} delay={index * 0.1}>
+            <Link to={`/${slug}`} className="serviceCard">
+              <h2 className="service-title">{title}</h2>
+              <p className="service-desc">{description}</p>
+              <span className="service-link-cta">Learn more →</span>
+            </Link>
+          </AnimateIn>
         ))}
       </div>
     </main>

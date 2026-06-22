@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { AnimateIn } from "../components/AnimateIn";
 
-const ContactInfo = ({ icon, label, value }) => (
+const ContactInfo = ({ label, value }) => (
   <div className="contact-info-item">
     <div>
       <p className="contact-info-label">{label}</p>
@@ -10,28 +10,40 @@ const ContactInfo = ({ icon, label, value }) => (
 );
 
 const Contact = () => {
+  const contactItems = [
+    { label: "Location", value: "Kathmandu, Nepal" },
+    { label: "Email", value: "hello@cantordust.ai" },
+    { label: "Phone", value: "+977 000 000 000" },
+    { label: "Office Hours", value: "Mon – Fri, 9am – 6pm NPT" },
+  ];
+
   return (
     <section className="contact-page">
-      <div className="section-header">
-        <p className="section-eyebrow">Get In Touch</p>
-        <h1 className="section-title">Contact Us</h1>
-        <p>Have a project in mind? We'd love to hear from you.</p>
-      </div>
+      <AnimateIn>
+        <div className="section-header">
+          <p className="section-eyebrow">Get In Touch</p>
+          <h1 className="section-title">Contact Us</h1>
+          <p>Have a project in mind? We'd love to hear from you.</p>
+        </div>
+      </AnimateIn>
 
       <div className="contact-info-grid">
-        <ContactInfo icon="📍" label="Location" value="Kathmandu, Nepal" />
-        <ContactInfo icon="✉️" label="Email" value="hello@cantordust.ai" />
-        <ContactInfo icon="📞" label="Phone" value="+977 000 000 000" />
-        <ContactInfo icon="🕐" label="Office Hours" value="Mon – Fri, 9am – 6pm NPT" />
+        {contactItems.map(({ label, value }, index) => (
+          <AnimateIn key={label} delay={index * 0.08}>
+            <ContactInfo label={label} value={value} />
+          </AnimateIn>
+        ))}
       </div>
 
-      <div className="contact-socials">
-        <p className="contact-info-label">Follow Us</p>
-        <div className="social-links">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">Twitter / X</a>
+      <AnimateIn delay={0.2}>
+        <div className="contact-socials">
+          <p className="contact-info-label">Follow Us</p>
+          <div className="social-links">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">Twitter / X</a>
+          </div>
         </div>
-      </div>
+      </AnimateIn>
     </section>
   );
 };

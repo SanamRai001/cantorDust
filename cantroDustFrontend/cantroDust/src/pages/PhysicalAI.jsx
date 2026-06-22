@@ -1,4 +1,5 @@
 import annotationImg from "../assets/Annotation_edited.avif";
+import { AnimateIn } from '../components/AnimateIn';
 
 const annotationSteps = [
   {
@@ -43,9 +44,8 @@ const PhysicalAI = () => {
   return (
     <main className="pai-page">
 
-      {/* Intro */}
       <section className="pai-intro">
-        <div className="pai-intro-text">
+        <AnimateIn className="pai-intro-text">
           <p className="section-eyebrow">Physical AI</p>
           <h1 className="section-title">Real-World Datasets for Robotics & Embodied AI</h1>
           <p className="pai-body">
@@ -59,64 +59,72 @@ const PhysicalAI = () => {
             and scalability for machine learning applications — bridging the gap between
             digital intelligence and real-world interaction.
           </p>
-        </div>
-        <div className="pai-intro-image">
+        </AnimateIn>
+        <AnimateIn delay={0.15} className="pai-intro-image">
           <img src={annotationImg} alt="Data Annotation Process" />
-        </div>
+        </AnimateIn>
       </section>
 
-      {/* Annotation Steps */}
       <section className="pai-steps-section">
-        <div className="section-header">
-          <p className="section-eyebrow">Our Process</p>
-          <h2 className="section-title">How We Annotate Data</h2>
-          <p>A rigorous, multi-stage pipeline that produces training-ready datasets.</p>
-        </div>
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">Our Process</p>
+            <h2 className="section-title">How We Annotate Data</h2>
+            <p>A rigorous, multi-stage pipeline that produces training-ready datasets.</p>
+          </div>
+        </AnimateIn>
         <div className="pai-steps-grid">
-          {annotationSteps.map(({ id, title, description }) => (
-            <div key={id} className="pai-step-card">
-              <span className="pai-step-number">0{id}</span>
-              <h3 className="pai-step-title">{title}</h3>
-              <p className="pai-step-desc">{description}</p>
-            </div>
+          {annotationSteps.map(({ id, title, description }, index) => (
+            <AnimateIn key={id} delay={(index % 3) * 0.1}>
+              <div className="pai-step-card">
+                <span className="pai-step-number">0{id}</span>
+                <h3 className="pai-step-title">{title}</h3>
+                <p className="pai-step-desc">{description}</p>
+              </div>
+            </AnimateIn>
           ))}
         </div>
       </section>
 
-      {/* Example Video */}
       <section className="pai-video-section">
-        <div className="section-header">
-          <p className="section-eyebrow">See It In Action</p>
-          <h2 className="section-title">Example Video</h2>
-          <p>A walkthrough of our annotation pipeline on a real industrial dataset.</p>
-        </div>
-        <div className="pai-video-wrap">
-          <video
-            controls
-            poster={annotationImg}
-            className="pai-video"
-          >
-            {/* Replace src with your actual video file when ready */}
-            <source src="/video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="pai-video-placeholder">
-            <span className="pai-video-placeholder-icon">▶</span>
-            <p>Video coming soon</p>
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">See It In Action</p>
+            <h2 className="section-title">Example Video</h2>
+            <p>A walkthrough of our annotation pipeline on a real industrial dataset.</p>
           </div>
-        </div>
+        </AnimateIn>
+        <AnimateIn delay={0.1}>
+          <div className="pai-video-wrap">
+            <video
+              controls
+              poster={annotationImg}
+              className="pai-video"
+            >
+              <source src="/video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="pai-video-placeholder">
+              <span className="pai-video-placeholder-icon">▶</span>
+              <p>Video coming soon</p>
+            </div>
+          </div>
+        </AnimateIn>
       </section>
 
-      {/* Annotation Example */}
       <section className="pai-annotation-section">
-        <div className="section-header">
-          <p className="section-eyebrow">Sample Output</p>
-          <h2 className="section-title">Annotation Example</h2>
-          <p>A snapshot of a completed annotation showing our labeling structure and granularity.</p>
-        </div>
-        <div className="pai-annotation-image-wrap">
-          <img src={annotationImg} alt="Annotation example output" />
-        </div>
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">Sample Output</p>
+            <h2 className="section-title">Annotation Example</h2>
+            <p>A snapshot of a completed annotation showing our labeling structure and granularity.</p>
+          </div>
+        </AnimateIn>
+        <AnimateIn delay={0.1}>
+          <div className="pai-annotation-image-wrap">
+            <img src={annotationImg} alt="Annotation example output" />
+          </div>
+        </AnimateIn>
       </section>
 
     </main>

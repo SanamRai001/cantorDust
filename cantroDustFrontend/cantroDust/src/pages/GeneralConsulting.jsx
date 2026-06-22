@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AnimateIn } from '../components/AnimateIn';
 
 const verticals = [
   {
@@ -62,56 +63,65 @@ const GeneralConsulting = () => {
   return (
     <main className="gc-page">
 
-      {/* Our Verticals */}
       <section className="gc-section">
-        <div className="section-header">
-          <p className="section-eyebrow">What We Cover</p>
-          <h1 className="section-title">Our Verticals</h1>
-          <p>Sectors where data and AI can drive the most meaningful change.</p>
-        </div>
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">What We Cover</p>
+            <h1 className="section-title">Our Verticals</h1>
+            <p>Sectors where data and AI can drive the most meaningful change.</p>
+          </div>
+        </AnimateIn>
         <div className="gc-verticals">
-          {verticals.map(({ id, icon, title, description }) => (
-            <div key={id} className="gc-vertical-card">
-              <h3 className="gc-card-title">{title}</h3>
-              <p className="gc-card-desc">{description}</p>
-              <Link to="/contact" className="gc-cta">Start Now →</Link>
-            </div>
+          {verticals.map(({ id, title, description }, index) => (
+            <AnimateIn key={id} delay={index * 0.1}>
+              <div className="gc-vertical-card">
+                <h3 className="gc-card-title">{title}</h3>
+                <p className="gc-card-desc">{description}</p>
+                <Link to="/contact" className="gc-cta">Start Now →</Link>
+              </div>
+            </AnimateIn>
           ))}
         </div>
       </section>
 
-      {/* Types of Services */}
       <section className="gc-section gc-section--alt">
-        <div className="section-header">
-          <p className="section-eyebrow">How We Help</p>
-          <h2 className="section-title">Types of Services</h2>
-          <p>Tailored engagements for public and private sector organizations.</p>
-        </div>
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">How We Help</p>
+            <h2 className="section-title">Types of Services</h2>
+            <p>Tailored engagements for public and private sector organizations.</p>
+          </div>
+        </AnimateIn>
         <div className="gc-service-types">
-          {serviceTypes.map(({ id, icon, title, description }) => (
-            <div key={id} className="gc-service-card">
-              <div>
+          {serviceTypes.map(({ id, title, description }, index) => (
+            <AnimateIn key={id} delay={index * 0.1}>
+              <div className="gc-service-card">
+                <div>
+                  <h3 className="gc-card-title">{title}</h3>
+                  <p className="gc-card-desc">{description}</p>
+                </div>
+              </div>
+            </AnimateIn>
+          ))}
+        </div>
+      </section>
+
+      <section className="gc-section">
+        <AnimateIn>
+          <div className="section-header">
+            <p className="section-eyebrow">Ground Truth</p>
+            <h2 className="section-title">Primary Data Collection</h2>
+            <p>First-hand data from the field to power better decisions.</p>
+          </div>
+        </AnimateIn>
+        <div className="gc-data-grid">
+          {dataCollection.map(({ id, title, description }, index) => (
+            <AnimateIn key={id} delay={index * 0.1}>
+              <div className="gc-data-card">
                 <h3 className="gc-card-title">{title}</h3>
                 <p className="gc-card-desc">{description}</p>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Primary Data Collection */}
-      <section className="gc-section">
-        <div className="section-header">
-          <p className="section-eyebrow">Ground Truth</p>
-          <h2 className="section-title">Primary Data Collection</h2>
-          <p>First-hand data from the field to power better decisions.</p>
-        </div>
-        <div className="gc-data-grid">
-          {dataCollection.map(({ id, icon, title, description }) => (
-            <div key={id} className="gc-data-card">
-              <h3 className="gc-card-title">{title}</h3>
-              <p className="gc-card-desc">{description}</p>
-            </div>
+            </AnimateIn>
           ))}
         </div>
       </section>

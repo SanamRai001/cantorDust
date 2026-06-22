@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-primary:     #0a0f1e;
+  --bg-secondary:   #0f1729;
+  --bg-card:        #111827;
+  --accent:         #3b82f6;
+  --accent-hover:   #2563eb;
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+  --border:         rgba(255, 255, 255, 0.08);
+  --navbar-height:  70px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.Navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 2px  solid var(--border);
+}
+.heroSection{
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-direction: column;
+  background-image: url(./assets/cantorDust.png);
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: center;
+}
+.heroTitle{
+  font-size: 3rem;
+  color: var(--accent);
+}
+.heroBtn{
+  padding: 0.8rem 3rem; 
+  color: white;
+  background-color: var(--accent);
+  border-radius: 9999px;
+}
+.app-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content{
+  flex: 1;
+}
+.Footer{
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  border-top: 2px solid var(--border);
+}
+
+.pastEngagement{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.privateSectors, .developmentWorks{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.whoWeAre{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2rem;
+  gap: 2rem;
+}
+.whoWeAre h1{
+  font-size: 3rem;
+}
+
+.howWeWork{
+  display: flex;
+  flex-direction: column;
+  gap:2rem;
+  padding: 2rem;
+}
+

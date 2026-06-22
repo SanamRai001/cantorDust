@@ -1,7 +1,10 @@
 
+
 const Insights = () => {
   return (
-    <div>Insights</div>
+    <>
+      <h1 className="text-4xl">Insights</h1>
+    </>
   )
 }
 

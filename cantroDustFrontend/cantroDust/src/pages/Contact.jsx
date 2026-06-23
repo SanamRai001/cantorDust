@@ -12,9 +12,8 @@ const ContactInfo = ({ label, value }) => (
 const Contact = () => {
   const contactItems = [
     { label: "Location", value: "Kathmandu, Nepal" },
-    { label: "Email", value: "hello@cantordust.ai" },
-    { label: "Phone", value: "+977 000 000 000" },
-    { label: "Office Hours", value: "Mon – Fri, 9am – 6pm NPT" },
+    { label: "Email", value: "info@cantor-dust.com" },
+    { label: "Phone", value: "+1 617-216-5455, +977 9851431234" },
   ];
 
   return (
@@ -39,8 +38,7 @@ const Contact = () => {
         <div className="contact-socials">
           <p className="contact-info-label">Follow Us</p>
           <div className="social-links">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">Twitter / X</a>
+            <a href="https://www.linkedin.com/company/cantordust-analytics/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
           </div>
         </div>
       </AnimateIn>

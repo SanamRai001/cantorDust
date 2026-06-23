@@ -77,7 +77,6 @@ const GeneralConsulting = () => {
               <div className="gc-vertical-card">
                 <h3 className="gc-card-title">{title}</h3>
                 <p className="gc-card-desc">{description}</p>
-                <Link to="/contact" className="gc-cta">Start Now →</Link>
               </div>
             </AnimateIn>
           ))}

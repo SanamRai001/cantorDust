@@ -39,7 +39,8 @@ const teamMemberSchema = new mongoose.Schema({
       },
       message: 'Portfolio link must be a valid URL (http/https)'
     }
-  }
+  },
+  order: { type: Number, default: 0 }
 }, {
   timestamps: true
 });

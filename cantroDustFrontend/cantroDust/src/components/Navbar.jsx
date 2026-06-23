@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import logo from "../assets/cantorDust.png";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -20,79 +21,115 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="brand">CANTOR DUST</Link>
+    <>
+      <nav className="navbar">
 
-      <ul className="nav-links">
-        {links.map(({ to, label }) => (
-          <li key={to}>
-            <Link to={to} className={pathname === to ? 'active' : ''}>
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+        {/* Brand */}
+        <motion.div
+          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+        >
+          <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
+            <img src={logo} alt="Logo" />
+          </Link>
+        </motion.div>
 
-      <div className="cta">
-        <Link to="/contact">Contact Us</Link>
-      </div>
+        {/* Desktop nav links */}
+        <ul className="nav-links">
+          {links.map(({ to, label }, index) => (
+            <motion.li
+              key={to}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: 'easeOut', delay: prefersReducedMotion ? 0 : 0.1 + index * 0.07 }}
+            >
+              <Link to={to} className={`nav-link-item ${pathname === to ? 'active' : ''}`}>
+                {label}
+                {pathname === to && (
+                  <motion.span
+                    className="active-underline"
+                    layoutId="active-underline"
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                  />
+                )}
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
 
-      <button
-        className="hamburger"
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen(prev => !prev)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+        {/* Desktop CTA */}
+        <motion.div
+          className="cta"
+          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.15 }}
+        >
+          <Link to="/contact">Contact Us</Link>
+        </motion.div>
 
+        {/* Hamburger */}
+        <motion.button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(prev => !prev)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <motion.span animate={menuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.22 }} />
+          <motion.span animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }} transition={{ duration: 0.15 }} />
+          <motion.span animate={menuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.22 }} />
+        </motion.button>
+      </nav>
+
+      {/* Mobile menu — rendered outside nav so it sits below cleanly */}
       <AnimatePresence>
         {menuOpen && (
-          prefersReducedMotion ? (
-            <div className="mobile-menu">
-              {mobileMenuLinks.map(({ to, label }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  className={pathname === to ? 'active' : ''}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              key="mobile-menu"
-              className="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
+          <motion.div
+            key="mobile-menu"
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+          >
+            <div className="mobile-menu-inner">
               {mobileMenuLinks.map(({ to, label }, index) => (
                 <motion.div
                   key={to}
-                  initial={{ opacity: 0, x: -12 }}
+                  className="mobile-menu-row"
+                  initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.2 }}
+                  transition={{ delay: 0.04 + index * 0.055, duration: 0.2, ease: 'easeOut' }}
                 >
                   <Link
                     to={to}
-                    className={pathname === to ? 'active' : ''}
+                    className={`mobile-nav-link ${pathname === to ? 'active' : ''}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {label}
+                    <span className="mobile-link-label">{label}</span>
+                    {pathname === to && (
+                      <motion.span
+                        className="mobile-active-pill"
+                        layoutId="mobile-active-pill"
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
+                    <span className="mobile-link-arrow">→</span>
                   </Link>
                 </motion.div>
               ))}
-            </motion.div>
-          )
+            </div>
+
+            <div className="mobile-menu-footer">
+              <span>© {new Date().getFullYear()} Cantor Dust</span>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

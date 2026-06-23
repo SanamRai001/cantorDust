@@ -9,6 +9,7 @@ import Insights from './pages/Insights';
 import Contact from './pages/Contact';
 import GeneralConsulting from './pages/GeneralConsulting';
 import PhysicalAI from './pages/PhysicalAI';
+import ScrollToTop from './components/ScrollToTop';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -49,6 +50,8 @@ const AnimatedRoutes = () => {
 const App = () => {
   return (
     <Router>
+      <ScrollToTop>
+      </ScrollToTop>
       <div className="app-container">
         <Navbar />
         <main className="main-content">

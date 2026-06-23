@@ -3,7 +3,21 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import founderImage from "../assets/founder.avif";
 import partnerImage from "../assets/partner.avif";
-import { AnimateIn } from '../components/AnimateIn';
+import { AnimateIn, AnimateInFromRight } from '../components/AnimateIn';
+
+const TeamImage = ({ name, alt }) => {
+  const base = name.split(' ')[0].toLowerCase();
+  const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+  const [extIndex, setExtIndex] = useState(0);
+
+  return (
+    <img
+      src={`/about/${base}.${extensions[extIndex]}`}
+      alt={alt}
+      onError={() => setExtIndex(prev => prev + 1)}
+    />
+  );
+};
 
 const About = () => {
   const [team, setTeam] = useState([]);
@@ -60,25 +74,27 @@ const About = () => {
         </div>
       </AnimateIn>
 
-      <AnimateIn delay={0.15}>
-        <div>
+      <section className="about-team-section">
+        <AnimateIn>
           <h1 className="about-section-title">Our Team</h1>
-          <div className="staffMemebers">
-            {team.map((items, index) => (
-              <AnimateIn key={items._id} delay={(index % 4) * 0.08}>
-                <div className="teamCard">
-                  <Link to={items.portfolioLink}>
-                    <img src={items.photoUrl} alt={items.name} />
-                  </Link>
-                  <h2>{items.name}</h2>
-                  <h3>({items.role})</h3>
+        </AnimateIn>
+        <div className="staffMemebers">
+          {team.map((items) => (
+            <AnimateInFromRight key={items._id}>
+              <div className="mainTeam teamMember">
+                <Link to={items.portfolioLink}>
+                  <TeamImage name={items.name} alt={items.name} />
+                </Link>
+                <div className="about-content">
+                  <h2 className="about-heading">{items.name}</h2>
+                  <h3 className="team-role">({items.role})</h3>
                   <p>{items.bio}</p>
                 </div>
-              </AnimateIn>
-            ))}
-          </div>
+              </div>
+            </AnimateInFromRight>
+          ))}
         </div>
-      </AnimateIn>
+      </section>
     </div>
   );
 };

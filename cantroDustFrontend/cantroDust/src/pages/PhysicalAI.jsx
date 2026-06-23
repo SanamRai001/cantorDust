@@ -56,7 +56,7 @@ const PhysicalAI = () => {
           </p>
           <p className="pai-body">
             These datasets are carefully curated to ensure high accuracy, consistency,
-            and scalability for machine learning applications — bridging the gap between
+            and scalability for machine learning applications bridging the gap between
             digital intelligence and real-world interaction.
           </p>
         </AnimateIn>

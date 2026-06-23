@@ -38,3 +38,23 @@ export const HeroAnimate = ({ children, delay = 0, className = '' }) => {
     </motion.div>
   );
 };
+
+export const AnimateInFromRight = ({ children, delay = 0, className = '' }) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, x: 72 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+};

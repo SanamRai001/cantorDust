@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Marquee from 'react-fast-marquee';
 import logo from "../assets/cantorDust.png";
 import { AnimateIn, HeroAnimate } from '../components/AnimateIn';
+import DustParticles from '../components/DustParticles';
 
-const API = 'http://localhost:5000/api';
+const privateLogos = [1, 2, 3, 4, 5, 6, 7, 8].map(n => `/logos/private/${String(n).padStart(2, '0')}.png`);
+const developmentLogos = [1, 2, 3, 4].map(n => `/logos/development/${String(n).padStart(2, '0')}.png`);
 
 const HowWeWorkStep = ({ number, title, description, delay }) => (
   <AnimateIn delay={delay}>
@@ -20,51 +20,34 @@ const HowWeWorkStep = ({ number, title, description, delay }) => (
 );
 
 const Home = () => {
-  const [privateSectors, setPrivateSectors] = useState([]);
-  const [developmentWorks, setDevelopmentWorks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        const [privateRes, devRes] = await Promise.all([
-          axios.get(`${API}/privateWorks`),
-          axios.get(`${API}/developmentWorks`),
-        ]);
-        setPrivateSectors(privateRes.data.data);
-        setDevelopmentWorks(devRes.data.data);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAllData();
-  }, []);
-
   return (
     <>
       <section className="heroSection">
-        <HeroAnimate delay={0}>
-          <p className="hero-eyebrow">AI / ML Consulting</p>
-        </HeroAnimate>
-        <HeroAnimate delay={0.1}>
-          <h1 className="heroTitle">Intelligence for complex<br />real-world environments.</h1>
-        </HeroAnimate>
-        <HeroAnimate delay={0.2}>
-          <p className="hero-sub">
-            We help organizations solve hard operational and analytical challenges
-            across Energy, Healthcare, Manufacturing, and Physical AI.
-          </p>
-        </HeroAnimate>
-        <HeroAnimate delay={0.3}>
-          <Link to="/contact" className="heroBtn">Contact Us</Link>
-        </HeroAnimate>
+        <DustParticles />
+        <div className="hero-content">
+          <HeroAnimate delay={0}>
+            <p className="hero-eyebrow">AI / ML Consulting</p>
+          </HeroAnimate>
+          <HeroAnimate delay={0.1}>
+            <h1 className="heroTitle">Intelligence for complex<br />real-world environments.</h1>
+          </HeroAnimate>
+          <HeroAnimate delay={0.2}>
+            <p className="hero-sub">
+              We help organizations solve hard operational and analytical challenges
+              across Energy, Healthcare, Manufacturing, and Physical AI.
+            </p>
+          </HeroAnimate>
+          <HeroAnimate delay={0.3}>
+            <Link to="/contact" className="heroBtn">Contact Us</Link>
+          </HeroAnimate>
+        </div>
       </section>
 
       <section className="whoWeAre">
         <AnimateIn className="who-image-wrap">
-          <img src={logo} alt="Cantor Dust" className="who-logo" />
+          <video 
+            src="/home/who-we-are.mp4" autoPlay loop playsInline muted className="w-[640px] h-[360px]"
+          />        
         </AnimateIn>
         <AnimateIn delay={0.1} className="who-text">
           <p className="section-eyebrow">Who We Are</p>
@@ -120,37 +103,31 @@ const Home = () => {
           </div>
         </AnimateIn>
 
-        {loading ? (
-          <p className="loading-text">Loading engagements…</p>
-        ) : (
-          <>
-            <AnimateIn delay={0.1}>
-              <div className="marquee-group">
-                <p className="marquee-label">Private Sector</p>
-                <Marquee gradient={false} speed={50} pauseOnHover>
-                  {privateSectors.map(item => (
-                    <div key={item._id} className="marquee-item">
-                      <img src={item.imageUrl} alt="Private sector client" />
-                    </div>
-                  ))}
-                </Marquee>
-              </div>
-            </AnimateIn>
+        <AnimateIn delay={0.1}>
+          <div className="marquee-group">
+            <p className="marquee-label">Private Sector</p>
+            <Marquee gradient={false} speed={50} pauseOnHover>
+              {privateLogos.map((src, i) => (
+                <div key={i} className="marquee-item">
+                  <img src={src} alt={`Private sector client ${i + 1}`} />
+                </div>
+              ))}
+            </Marquee>
+          </div>
+        </AnimateIn>
 
-            <AnimateIn delay={0.2}>
-              <div className="marquee-group">
-                <p className="marquee-label">Development Work</p>
-                <Marquee gradient={false} speed={50} pauseOnHover direction="right">
-                  {developmentWorks.map(item => (
-                    <div key={item._id} className="marquee-item">
-                      <img src={item.imageUrl} alt="Development work client" />
-                    </div>
-                  ))}
-                </Marquee>
-              </div>
-            </AnimateIn>
-          </>
-        )}
+        <AnimateIn delay={0.2}>
+          <div className="marquee-group">
+            <p className="marquee-label">Development Work</p>
+            <Marquee gradient={false} speed={50} pauseOnHover direction="right">
+              {developmentLogos.map((src, i) => (
+                <div key={i} className="marquee-item">
+                  <img src={src} alt={`Development work client ${i + 1}`} />
+                </div>
+              ))}
+            </Marquee>
+          </div>
+        </AnimateIn>
       </section>
     </>
   );
